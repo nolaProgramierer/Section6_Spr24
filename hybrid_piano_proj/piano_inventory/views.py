@@ -3,8 +3,10 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.db import IntegrityError
+from django.views.generic import TemplateView
 
 from .models import User, Piano, Comment
+
 
 def index(request):
     return HttpResponse("Piano inventory app working!");
@@ -57,3 +59,11 @@ def register(request):
         login(request, user)
         return HttpResponseRedirect(reverse("index"))
     return render(request, "piano_inventory/register.html")
+
+
+# -------------------------------------------------- #
+# Class-based views
+# -------------------------------------------------- #
+
+class IndexWebpack(TemplateView):
+    template_name = "piano_inventory/index_webpack.html"

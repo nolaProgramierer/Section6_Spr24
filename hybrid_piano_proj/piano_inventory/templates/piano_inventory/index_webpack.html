@@ -1,0 +1,14 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Django/Webpack Pipeline</title>
+    </head>
+    <body>
+        <h3>Webpack pipeline</h3>
+        <!-- Webpack bundle will be inserted here -->
+        <div id="js-insert"></div>
+        <script src="{% static 'piano_inventory/indexBundle.js' %}"></script>
+    </body>
+</html>
