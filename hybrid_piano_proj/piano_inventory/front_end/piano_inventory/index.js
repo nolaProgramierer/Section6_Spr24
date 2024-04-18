@@ -13,8 +13,10 @@
 
 import React from 'react';
 import ReactDOM from "react-dom";
+import ListView from '../../components/listView';
 
 ReactDOM.render(
-  <h3>This is a React component rendered in a Django app</h3>,
-  document.getElementById('root')
+  <h3>This is the React ListView component</h3>,
+  <ListView />,
+  document.getElementById('js-framework')
 );

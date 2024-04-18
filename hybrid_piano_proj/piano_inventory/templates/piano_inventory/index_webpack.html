@@ -1,16 +1,15 @@
+{% extends "piano_inventory/layout.html" %}
 {% load static %}
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Django/Webpack Pipeline</title>
-    </head>
-    <body>
-        <h3>Webpack pipeline</h3>
-        <!--React will be inserted here -->
-        <div id="root"/>
-        <!-- Webpack bundle will be inserted here -->
-        <div id="js-insert"></div>
-        <script src="{% static 'piano_inventory/indexBundle.js' %}"></script>
-    </body>
-</html>
+{% block body %}
+    <h3>React page</h3>
+    
+    <div id="js-framework"/>
+    <!--React will be inserted here -->
+    
+    <script src="{% static 'piano_inventory/indexBundle.js' %}"></script>
+{% endblock %}
+
+
+    
+    

@@ -10,13 +10,23 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./piano_inventory/components/listView.js":
+/*!************************************************!*\
+  !*** ./piano_inventory/components/listView.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nvar ListView = function ListView() {\n  return /*#__PURE__*/React.createElement(\"div\", {\n    style: listStyle\n  }, \"This is the Piano List view\");\n};\nvar listStyle = {\n  fontSize: \"30px\",\n  color: \"blue\"\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ListView);\n\n//# sourceURL=webpack://hybrid_piano_proj/./piano_inventory/components/listView.js?");
+
+/***/ }),
+
 /***/ "./piano_inventory/front_end/piano_inventory/index.js":
 /*!************************************************************!*\
   !*** ./piano_inventory/front_end/piano_inventory/index.js ***!
   \************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n// Build a div with text\n\n// const webpackInsert = () => {\n//     console.log(\"Component function\");\n//     const element = document.createElement('div');\n//     element.innerHTML = 'Inserting static js file';\n//     return element;\n//   }\n\n//   document.querySelector(\"#js-insert\").appendChild(webpackInsert());\n\n// console.log(\"Webpack insert function\")\n\n\n\nreact_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"h3\", null, \"This is a React component rendered in a Django app\"), document.getElementById('root'));\n\n//# sourceURL=webpack://hybrid_piano_proj/./piano_inventory/front_end/piano_inventory/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n/* harmony import */ var _components_listView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/listView */ \"./piano_inventory/components/listView.js\");\n// Build a div with text\n\n// const webpackInsert = () => {\n//     console.log(\"Component function\");\n//     const element = document.createElement('div');\n//     element.innerHTML = 'Inserting static js file';\n//     return element;\n//   }\n\n//   document.querySelector(\"#js-insert\").appendChild(webpackInsert());\n\n// console.log(\"Webpack insert function\")\n\n\n\n\nreact_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"h3\", null, \"This is the React ListView component\"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_listView__WEBPACK_IMPORTED_MODULE_2__[\"default\"], null), document.getElementById('js-framework'));\n\n//# sourceURL=webpack://hybrid_piano_proj/./piano_inventory/front_end/piano_inventory/index.js?");
 
 /***/ }),
 
