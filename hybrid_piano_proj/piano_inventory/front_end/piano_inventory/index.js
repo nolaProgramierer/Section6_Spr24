@@ -1,4 +1,4 @@
-// Build a div with text
+//Build a div with text
 
 // const webpackInsert = () => {
 //     console.log("Component function");
@@ -12,11 +12,16 @@
 // console.log("Webpack insert function")
 
 import React from 'react';
-import ReactDOM from "react-dom";
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+
 import ListView from '../../components/listView';
 
-ReactDOM.render(
-  <h3>This is the React ListView component</h3>,
-  <ListView />,
-  document.getElementById('js-framework')
+const rootElement = document.getElementById('js-framework');
+const root = createRoot(rootElement);
+
+root.render(
+  <StrictMode>
+    <ListView />
+  </StrictMode>
 );

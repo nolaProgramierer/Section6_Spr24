@@ -74,18 +74,40 @@ def piano_list(request):
         serializer = PianoSerializer(snippets, many=True)
         return JsonResponse(serializer.data, safe=False)
 
-    # elif request.method == 'POST':
-    #     data = JSONParser().parse(request)
-    #     serializer = PianoSerializer(data=data)
-    #     if serializer.is_valid():
-    #         serializer.save()
-    #         return JsonResponse(serializer.data, status=201)
-    #     return JsonResponse(serializer.errors, status=400)
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = PianoSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
 
 
+@csrf_exempt
+def piano_detail(request, pk):
+    """
+    Retrieve, update or delete a piano.
+    """
+    try:
+        piano = Piano.objects.get(pk=pk)
+    except Piano.DoesNotExist:
+        return HttpResponse(status=404)
 
+    if request.method == 'GET':
+        serializer = PianoSerializer(piano)
+        return JsonResponse(serializer.data)
 
+    elif request.method == 'PUT':
+        data = JSONParser().parse(request)
+        serializer = PianoSerializer(piano, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+        return JsonResponse(serializer.errors, status=400)
 
+    elif request.method == 'DELETE':
+        piano.delete()
+        return HttpResponse(status=204)
 
 
 # -------------------------------------------------- #
