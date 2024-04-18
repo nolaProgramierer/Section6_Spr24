@@ -1,10 +1,13 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.db import IntegrityError
 from django.views.generic import TemplateView
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.parsers import JSONParser
 
+from piano_inventory.serializers import PianoSerializer
 from .models import User, Piano, Comment
 
 
@@ -59,6 +62,30 @@ def register(request):
         login(request, user)
         return HttpResponseRedirect(reverse("index"))
     return render(request, "piano_inventory/register.html")
+
+
+@csrf_exempt
+def piano_list(request):
+    """
+    List all pianos, or create a new piano.
+    """
+    if request.method == 'GET':
+        snippets = Piano.objects.all()
+        serializer = PianoSerializer(snippets, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+    # elif request.method == 'POST':
+    #     data = JSONParser().parse(request)
+    #     serializer = PianoSerializer(data=data)
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return JsonResponse(serializer.data, status=201)
+    #     return JsonResponse(serializer.errors, status=400)
+
+
+
+
+
 
 
 # -------------------------------------------------- #
