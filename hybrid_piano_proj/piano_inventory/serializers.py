@@ -4,4 +4,4 @@ from .models import Piano
 class PianoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Piano
-        fields = ["brand", "price", "size", "imageUrl", "vote" ] 
+        fields = ["id", "brand", "price", "size", "imageUrl", "vote" ] 
