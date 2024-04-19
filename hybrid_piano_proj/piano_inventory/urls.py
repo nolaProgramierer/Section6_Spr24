@@ -16,8 +16,8 @@ urlpatterns = [
     path("api/pianos/<int:pk>/", views.piano_detail),
 
     # Webpack views
-    # path("index_webpack", IndexWebpack.as_view()),
-    path("index_webpack", TemplateView.as_view(template_name="piano_inventory/index_webpack.html")),
+    # path("index_inventory", IndexWebpack.as_view()),
+    path("index_inventory", TemplateView.as_view(template_name="piano_inventory/index_inventory.html")),
 ]
 
 # router = routers.DefaultRouter()

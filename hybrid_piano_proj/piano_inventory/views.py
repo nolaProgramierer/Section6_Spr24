@@ -115,4 +115,4 @@ def piano_detail(request, pk):
 # -------------------------------------------------- #
 
 class IndexWebpack(TemplateView):
-    template_name = "piano_inventory/index_webpack.html"
+    template_name = "piano_inventory/index_inventory.html"
