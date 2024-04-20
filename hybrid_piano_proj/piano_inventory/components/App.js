@@ -1,24 +1,61 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 // Imported components
 import ListView from './listView';
 import Details from './Details';
 
+
 // Main component
 const App = () => {
+
+const [data, setData] = useState(null);
+const [isLoading, setIsLoading] = useState(true);
+const [error, setError] = useState(null);
+
+console.log("Fetching pianos")
+const url = `http://127.0.0.1:8000/api/pianos/`
+
+// After component loads retireve data from Django end point
+useEffect(() => {
+    const fetchData = async () => {
+        try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error('Failed to fetch data');
+        }
+        const jsonData = await response.json();
+        setData(jsonData);
+        } catch (error) {
+        setError(error.message);
+        } finally {
+        setIsLoading(false);
+        }
+    };
+
+    fetchData();
+    }, []);
+
+    // Render loading state if data is still loading
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+
+    // Render error state if there was an error
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
+
    return (
     <Router>
         <Routes>
-            <Route path ="/index_inventory" element={<ListView/>} />
-            <Route path ="/piano_details/:id" element={<Details/>} />
+            <Route path ="/index_inventory" element={<ListView data={data}/>} />
+            
+            {/* Pass data to Details component only when data is available */}
+            {data && <Route path="/piano_details/:id" element={<Details data={data} />} />}
        </Routes>
     </Router>
     
-    
-    // <div style={containerStyle}>
-    //     <ListView />
-    // </div>
     
    )
 }
