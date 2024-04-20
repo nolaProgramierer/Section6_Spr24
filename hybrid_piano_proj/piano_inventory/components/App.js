@@ -11,14 +11,14 @@ import AddPianoForm from './AddPianoForm';
 // Main component
 const App = () => {
 
-const [data, setData] = useState(null);
+const [data, setData] = useState([]);
 const [isLoading, setIsLoading] = useState(true);
 const [error, setError] = useState(null);
 
 console.log("Fetching pianos")
 const url = `http://127.0.0.1:8000/api/pianos/`
 
-// After component loads retireve data from Django end point
+// After component loads retrieve data from Django end point
 useEffect(() => {
     const fetchData = async () => {
         try {
@@ -51,12 +51,15 @@ useEffect(() => {
    return (
     <Router>
         <Routes>
+            {/* Display list of all pianos */}
             <Route path ="/index_inventory" element={<ListView data={data}/>} />
             
             {/* Pass data to Details component only when data is available */}
             {data && <Route path="/piano_details/:id" element={<Details data={data} />} />}
 
             {/* <Route path ="/add_piano" element={<AddPianoForm apiUrl={url}/>} /> */}
+
+            {/* Add a piano */}
             <Route path ="/piano_list" element={<AddPianoForm apiUrl={url}/>} />
 
        </Routes>

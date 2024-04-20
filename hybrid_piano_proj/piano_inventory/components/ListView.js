@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import AddPianoForm from './AddPianoForm';
-
 const ListView = (props) => {
     const { data } = props;
+
+    useEffect(() => {
+        console.log("Data:", data)
+    })
 
     // Render the page
     return (

@@ -6,12 +6,14 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ["id", "username", "email" ] 
 
-        
+
 class PianoSerializer(serializers.ModelSerializer):
-    owner = UserSerializer()
+    # owner = UserSerializer()
+    # owner = serializers.ReadOnlyField(source='owner.username')
+    owner = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), required=True)
     class Meta:
         model = Piano
-        fields = ["id", "brand", "price", "size", "imageUrl", "vote", "owner" ]
+        fields = ["id", "brand", "price", "size", "imageUrl", "owner" ]
 
 
 

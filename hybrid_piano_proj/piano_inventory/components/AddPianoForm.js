@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 const AddPianoForm = (props)=> {
     const { apiUrl } = props;
+    // Piano object state
     const [piano, setPiano] = useState({
         brand: '',
         price: '',
@@ -23,12 +24,12 @@ const AddPianoForm = (props)=> {
             // Updates the state with new value
             [name]: value,        
         }));
+        console.log(piano);
     };
     
     // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         try {
             const response = await fetch(apiUrl, {
                 method: "POST",
@@ -95,7 +96,6 @@ const AddPianoForm = (props)=> {
                         name="imageUrl"
                         value={piano.imageUrl}
                         onChange={handleChange}
-                        required
                     />
                 </div>
                 <button type="submit">Add Piano</button>

@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import login_required
 from django.forms import ModelForm
 import json
 
-from piano_inventory.serializers import PianoSerializer
+from piano_inventory.serializers import PianoSerializer, UserSerializer
 from .models import User, Piano, Comment
 
 
@@ -83,14 +83,18 @@ def piano_list(request):
     if request.method == 'GET':
         pianos = Piano.objects.all()
         serializer = PianoSerializer(pianos, many=True)
-        return JsonResponse(serializer.data, safe=False)
+        print(serializer)
+        return JsonResponse(serializer.data, safe=False) #Allows list in JSON
 
     elif request.method == 'POST':
         data = JSONParser().parse(request)
+        data['owner'] = request.user.id
         serializer = PianoSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data, status=201)
+        print(serializer.data)
+        print("Validation Errors:", serializer.errors)
         return JsonResponse(serializer.errors, status=400)
 
 
