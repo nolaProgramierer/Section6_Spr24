@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import AddPianoForm from './AddPianoForm';
+
 const ListView = (props) => {
     const { data } = props;
 
@@ -14,7 +16,8 @@ const ListView = (props) => {
                     <Link to={`/piano_details/${item.id}`}>{item.brand}</Link>
                 </li>
                 ))}
-            </ul> 
+            </ul>
+            <Link to={'/add_piano'}>Add a piano</Link>
        </div>   
     )
 }

@@ -10,12 +10,13 @@ urlpatterns = [
     path("login", views.login_view, name="login"),
     path("logout", views.logout_view, name="logout"),
     path("register", views.register, name="register"),
+    path("add_piano", views.add_piano, name="add_piano"),
     
     # Django REST Framework routes
     path("api/pianos/", views.piano_list),
     path("api/pianos/<int:pk>/", views.piano_detail),
 
-    # Webpack views
+    # Webpack/React views
     # path("index_inventory", IndexWebpack.as_view()),
     path("index_inventory", TemplateView.as_view(template_name="piano_inventory/index_inventory.html")),
 ]

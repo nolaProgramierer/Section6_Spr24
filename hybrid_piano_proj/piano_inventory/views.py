@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
@@ -6,13 +6,24 @@ from django.db import IntegrityError
 from django.views.generic import TemplateView
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
+from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.forms import ModelForm
+import json
 
 from piano_inventory.serializers import PianoSerializer
 from .models import User, Piano, Comment
 
 
+class AddPiano(ModelForm):
+    class Meta:
+        model = Piano
+        fields = ['brand', 'price', 'size', 'imageUrl']
+
+
 def index(request):
-    return HttpResponse("Piano inventory app working!");
+    print(request.user.username)
+    return HttpResponse("Piano inventory app index view!");
 
 
 def login_view(request):
@@ -70,8 +81,8 @@ def piano_list(request):
     List all pianos, or create a new piano.
     """
     if request.method == 'GET':
-        snippets = Piano.objects.all()
-        serializer = PianoSerializer(snippets, many=True)
+        pianos = Piano.objects.all()
+        serializer = PianoSerializer(pianos, many=True)
         return JsonResponse(serializer.data, safe=False)
 
     elif request.method == 'POST':
@@ -94,9 +105,10 @@ def piano_detail(request, pk):
         return HttpResponse(status=404)
 
     if request.method == 'GET':
+        # Serialize the Piano object along with the associated User
         serializer = PianoSerializer(piano)
         return JsonResponse(serializer.data)
-
+        
     elif request.method == 'PUT':
         data = JSONParser().parse(request)
         serializer = PianoSerializer(piano, data=data)
@@ -108,6 +120,19 @@ def piano_detail(request, pk):
     elif request.method == 'DELETE':
         piano.delete()
         return HttpResponse(status=204)
+
+
+@login_required
+def add_piano(request):
+    if request.method == "POST":
+        form = AddPiano(request.POST)
+        if form.is_valid():
+            piano_form = form.save(commit=False)
+            piano_form.owner = request.user
+            piano_form.save()
+            return HttpResponseRedirect('index_inventory')
+    form = AddPiano()
+    return render(request, 'piano_inventory/add_piano.html', {'form': form})
 
 
 # -------------------------------------------------- #

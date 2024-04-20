@@ -1,12 +1,16 @@
 // Details.js
-import React from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
 
 const Details = (props) => {
     const { data } = props;
     // Retrieve parameter 
     const { id } = useParams();
     const selectedItem = data.find(item => item.id === parseInt(id));
+
+    useEffect(() => {
+        console.log(data);
+    })
 
     if (!selectedItem) {
         return <div>Item not found</div>;
@@ -18,8 +22,10 @@ const Details = (props) => {
                 <h2>Details of {selectedItem.brand}</h2>
                 <p>Price: {selectedItem.price}</p>
                 <p>Piano size in cm: {selectedItem.size}</p>
+                <p>Owner: {selectedItem.owner.username}</p>
                 <p><img src={selectedItem.imageUrl} alt={selectedItem.brand} piano style={imageStyle}></img></p>
-            </div>  
+            </div>
+            <Link to={`/index_inventory`}>Back to Piano Inventory</Link>   
         </div>
     );
 };
@@ -36,4 +42,5 @@ const imageStyle = {
     height: "300px",
     boxShadow: "5px 10px #888888", 
 }
+
 export default Details;

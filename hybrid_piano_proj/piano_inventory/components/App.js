@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 // Imported components
 import ListView from './listView';
 import Details from './Details';
+import AddPianoForm from './AddPianoForm';
+
 
 
 // Main component
@@ -26,6 +28,7 @@ useEffect(() => {
         }
         const jsonData = await response.json();
         setData(jsonData);
+        console.log(`Logging user data ${jsonData[0].owner}`);
         } catch (error) {
         setError(error.message);
         } finally {
@@ -53,6 +56,9 @@ useEffect(() => {
             
             {/* Pass data to Details component only when data is available */}
             {data && <Route path="/piano_details/:id" element={<Details data={data} />} />}
+
+            <Route path ="/add_piano" element={<AddPianoForm apiUrl={url}/>} />
+
        </Routes>
     </Router>
     
