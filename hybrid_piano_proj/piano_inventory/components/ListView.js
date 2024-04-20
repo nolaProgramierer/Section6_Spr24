@@ -4,10 +4,6 @@ import { Link } from 'react-router-dom';
 const ListView = (props) => {
     const { data } = props;
 
-    useEffect(() => {
-        console.log("Data:", data)
-    })
-
     // Render the page
     return (
        <div style={listStyle}>
@@ -20,7 +16,6 @@ const ListView = (props) => {
                 ))}
             </ul>
             <a href="/add_piano">Add a piano(sync)</a><br />
-            {/* <Link to={'/add_piano'}>Add a piano(sync)</Link> */}
             <Link to={'/piano_list'}>Add a piano(async)</Link>
        </div>   
     )

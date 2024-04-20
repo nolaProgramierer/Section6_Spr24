@@ -8,8 +8,6 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class PianoSerializer(serializers.ModelSerializer):
-    # owner = UserSerializer()
-    # owner = serializers.ReadOnlyField(source='owner.username')
     owner = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), required=True)
     class Meta:
         model = Piano

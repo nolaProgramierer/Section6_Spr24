@@ -83,7 +83,6 @@ def piano_list(request):
     if request.method == 'GET':
         pianos = Piano.objects.all()
         serializer = PianoSerializer(pianos, many=True)
-        print(serializer)
         return JsonResponse(serializer.data, safe=False) #Allows list in JSON
 
     elif request.method == 'POST':
@@ -94,7 +93,6 @@ def piano_list(request):
             serializer.save()
             return JsonResponse(serializer.data, status=201)
         print(serializer.data)
-        print("Validation Errors:", serializer.errors)
         return JsonResponse(serializer.errors, status=400)
 
 
