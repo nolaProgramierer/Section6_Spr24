@@ -17,7 +17,9 @@ const ListView = (props) => {
                 </li>
                 ))}
             </ul>
-            <Link to={'/add_piano'}>Add a piano</Link>
+            <a href="/add_piano">Add a piano(sync)</a><br />
+            {/* <Link to={'/add_piano'}>Add a piano(sync)</Link> */}
+            <Link to={'/piano_list'}>Add a piano(async)</Link>
        </div>   
     )
 }

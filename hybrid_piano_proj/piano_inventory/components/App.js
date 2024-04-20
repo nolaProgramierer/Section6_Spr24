@@ -28,7 +28,6 @@ useEffect(() => {
         }
         const jsonData = await response.json();
         setData(jsonData);
-        console.log(`Logging user data ${jsonData[0].owner}`);
         } catch (error) {
         setError(error.message);
         } finally {
@@ -57,7 +56,8 @@ useEffect(() => {
             {/* Pass data to Details component only when data is available */}
             {data && <Route path="/piano_details/:id" element={<Details data={data} />} />}
 
-            <Route path ="/add_piano" element={<AddPianoForm apiUrl={url}/>} />
+            {/* <Route path ="/add_piano" element={<AddPianoForm apiUrl={url}/>} /> */}
+            <Route path ="/piano_list" element={<AddPianoForm apiUrl={url}/>} />
 
        </Routes>
     </Router>

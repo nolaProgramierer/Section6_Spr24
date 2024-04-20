@@ -130,7 +130,7 @@ def add_piano(request):
             piano_form = form.save(commit=False)
             piano_form.owner = request.user
             piano_form.save()
-            return HttpResponseRedirect('index_inventory')
+            return HttpResponseRedirect(reverse('index_inventory'))
     form = AddPiano()
     return render(request, 'piano_inventory/add_piano.html', {'form': form})
 
