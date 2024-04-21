@@ -15,14 +15,19 @@ const ListView = (props) => {
                 </li>
                 ))}
             </ul>
-            <a href="/add_piano">Add a piano(sync)</a><br />
-            <Link to={'/piano_list'}>Add a piano(async)</Link>
+            
+            <a style={linkStyle} href="/add_piano">Add a piano(sync)</a><br />
+            <Link style={linkStyle} to={'/piano_list'}>Add a piano(async)</Link>
        </div>   
     )
 }
 
 const listStyle = {
-    fontSize: "30px",
+    fontSize: "1.5em",
+}
+const linkStyle = {
+    fontSize: ".75em",
+    color: "gray",
 }
 
 export default ListView;

@@ -72,7 +72,6 @@ const containerStyle = {
   flexWrap: "nowrap",
   justifyContent: "center",
   alignItems: "center",
-  fontSize: "30px"
 }
 
 export default App;

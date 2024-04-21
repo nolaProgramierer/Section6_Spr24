@@ -22,6 +22,7 @@ const AddPianoForm = (props)=> {
             // Spreads the previous state
             ...prevPiano,
             // Updates the state with new value
+            // Key is a computed property name
             [name]: value,        
         }));
         console.log(piano);
