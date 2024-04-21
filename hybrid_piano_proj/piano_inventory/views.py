@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
@@ -6,13 +6,11 @@ from django.db import IntegrityError
 from django.views.generic import TemplateView
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
-from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.forms import ModelForm
-import json
 
-from piano_inventory.serializers import PianoSerializer, UserSerializer
-from .models import User, Piano, Comment
+from piano_inventory.serializers import PianoSerializer
+from .models import User, Piano
 
 
 class AddPiano(ModelForm):
@@ -75,6 +73,7 @@ def register(request):
     return render(request, "piano_inventory/register.html")
 
 
+# Django Rest Framework backend
 @csrf_exempt
 def piano_list(request):
     """
@@ -82,20 +81,23 @@ def piano_list(request):
     """
     if request.method == 'GET':
         pianos = Piano.objects.all()
+        # Serialize the response with the full owner details
         serializer = PianoSerializer(pianos, many=True)
         return JsonResponse(serializer.data, safe=False) #Allows list in JSON
 
     elif request.method == 'POST':
         data = JSONParser().parse(request)
-        data['owner'] = request.user.id
+        data["owner"] = request.user.id
         serializer = PianoSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data, status=201)
         print(serializer.data)
+        print('Serializer error', serializer.errors)
         return JsonResponse(serializer.errors, status=400)
 
 
+# Django Rest Framework backend
 @csrf_exempt
 def piano_detail(request, pk):
     """
@@ -107,7 +109,6 @@ def piano_detail(request, pk):
         return HttpResponse(status=404)
 
     if request.method == 'GET':
-        # Serialize the Piano object along with the associated User
         serializer = PianoSerializer(piano)
         return JsonResponse(serializer.data)
         
@@ -124,6 +125,7 @@ def piano_detail(request, pk):
         return HttpResponse(status=204)
 
 
+# Create a piano object with Django form template
 @login_required
 def add_piano(request):
     if request.method == "POST":

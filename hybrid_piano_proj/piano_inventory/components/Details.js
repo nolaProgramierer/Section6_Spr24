@@ -22,7 +22,7 @@ const Details = (props) => {
                 <h2>Details of {selectedItem.brand}</h2>
                 <p>Price: {selectedItem.price}</p>
                 <p>Piano size in cm: {selectedItem.size}</p>
-                <p>Owner: {selectedItem.owner.username}</p>
+                <p>Owner: {selectedItem.owner_detail.username}</p>
                 <p><img src={selectedItem.imageUrl} alt={selectedItem.brand} piano style={imageStyle}></img></p>
             </div>
             <Link to={`/index_inventory`}>Back to Piano Inventory</Link>   
