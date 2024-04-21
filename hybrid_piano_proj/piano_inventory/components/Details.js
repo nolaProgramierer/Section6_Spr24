@@ -20,7 +20,7 @@ const Details = (props) => {
         <div style={detailPageStyle}>
             <div style={detailStyle}>
                 <h2>Details of {selectedItem.brand}</h2>
-                <p>Price: {selectedItem.price}</p>
+                <p>Price: ${selectedItem.price}</p>
                 <p>Piano size in cm: {selectedItem.size}</p>
                 <p>Owner: {selectedItem.owner_detail.username}</p>
                 <p><img src={selectedItem.imageUrl} alt={selectedItem.brand} piano style={imageStyle}></img></p>
@@ -33,14 +33,20 @@ const detailPageStyle = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    padding: "28px 0px",
 }
 const detailStyle = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "start",
+    justifyItems: "space-between",
+    padding: "32px 32px",
+    width: "50%",
     border: "1px solid black",
-    padding: "30px",
 }
 const imageStyle = {
-    height: "300px",
-    boxShadow: "5px 10px #888888", 
+    height: "304px",
+    boxShadow: "12px 12px 8px #808080", 
 }
 
 export default Details;

@@ -66,12 +66,4 @@ useEffect(() => {
    )
 }
 
-const containerStyle = {
-  display: "flex",
-  flexDirection: "column",
-  flexWrap: "nowrap",
-  justifyContent: "center",
-  alignItems: "center",
-}
-
 export default App;
