@@ -1,3 +1,39 @@
+#nav-container {
+    display: flex;
+}
+.nav {
+    display: flex;
+    width: 36%;
+    justify-content: space-around;
+    list-style-type: none;
+    
+}
 .center {
     text-align: center;
+}
+#index-body {
+    display: flex;
+    flex-direction: column;
+    height: 600px;
+    justify-content: space-around;
+    font-size: 1.25em;
+    line-height: 1.5;
+}
+#index-img-block {
+    display: flex;
+    padding: 60px;
+    align-items: center;
+}
+#index-img-block-item {
+    width: 50%;
+}
+#index-img-block-text {
+    padding: 48px;
+}
+#index-img {
+    width: 40%;
+    box-shadow: 12px 12px 10px #808080;
+}
+#index-react-link {
+    font-size: 1.25em;
 }

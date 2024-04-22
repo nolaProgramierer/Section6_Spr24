@@ -20,8 +20,7 @@ class AddPiano(ModelForm):
 
 
 def index(request):
-    print(request.user.username)
-    return HttpResponse("Piano inventory app index view!");
+    return render(request, "piano_inventory/index.html")
 
 
 def login_view(request):

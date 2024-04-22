@@ -1,0 +1,18 @@
+{% extends "piano_inventory/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <div id="index-body">
+
+        <h3 class="center">Application Information</h3>
+        <div id="index-img-block">
+            <p class="index-img-block-item" id="index-img-block-text">This is the index page for the <strong>piano inventor</strong>y application.  It is a hybrid application utilizing the <a href="https://docs.djangoproject.com/en/5.0/">Django</a>, <a href="https://www.django-rest-framework.org/">Django Rest</a> and the <a href="https://react.dev/">React JavaScript</a> frameworks. To navigate to a page where React is rendered through a Django template  click the link below.</p>
+
+            <img class="index-img-block-item" id="index-img"  src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.australianpianowarehouse.com.au%2Fwp-content%2Fuploads%2F2020%2F09%2FHome_GrandImage.jpg&f=1&nofb=1&ipt=a6ce799d173acbe5ab72f68a2eb5b7bcf82b8f35a4f9bf90664a706a19eccb31&ipo=images" alt="piano warehouse">
+        </div>
+
+        <a id="index-react-link" href="{% url 'index_inventory' %}">Click here to enter the app</a>
+
+    </div>
+
+{% endblock%}
