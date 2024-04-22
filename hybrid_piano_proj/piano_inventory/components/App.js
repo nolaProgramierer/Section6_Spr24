@@ -55,7 +55,7 @@ useEffect(() => {
             <Route path ="/index_inventory" element={<ListView data={data}/>} />
             
             {/* Pass data to Details component only when data is available */}
-            {data && <Route path="/piano_details/:id" element={<Details data={data} />} />}
+            {data && <Route path="/piano_details/:id" element={<Details data={data} url={url}/>} />}
 
             {/* Add a piano */}
             <Route path ="/piano_list" element={<AddPianoForm apiUrl={url}/>} />

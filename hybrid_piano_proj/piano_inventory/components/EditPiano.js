@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
-
+import { useParams, Link, useNavigate } from 'react-router-dom';
 
 const EditPiano = (props)=> {
     const { apiUrl, data } = props;
+
+    // Initialize useNavigate
+    const navigate = useNavigate();
 
     // Retrieve parameter 
     const { id } = useParams();
@@ -54,6 +56,9 @@ const EditPiano = (props)=> {
             setPiano({ brand: "", size: "", price: "", imageUrl: ""});
             setSuccess(true);
             setError(null);
+
+            // Navigate to piano's detail page
+            // navigate(`/piano_details/${id}`)
         } catch (err) {
             setError(err.message);
             setSuccess(false);
@@ -65,8 +70,8 @@ const EditPiano = (props)=> {
             {error && <p>{error}</p>}
             {success && <p>Piano added successfuly!</p>}
 
-            <form onSubmit={handleSubmit}>
-                <div>
+            <form style={formStyle} onSubmit={handleSubmit}>
+                <div style={formDivStyle}>
                     <label>Brand:</label>
                     <input
                         type="text"
@@ -74,9 +79,10 @@ const EditPiano = (props)=> {
                         value={piano.brand}
                         onChange={handleChange}
                         required
+                        style={formInputStyle}
                     />
                 </div>
-                <div>
+                <div style={formDivStyle}>
                     <label>Price:</label>
                     <input
                         type="number"
@@ -84,9 +90,10 @@ const EditPiano = (props)=> {
                         value={piano.price}
                         onChange={handleChange}
                         required
+                        style={formInputStyle}
                     />
                 </div>
-                <div>
+                <div style={formDivStyle}>
                     <label>Size:</label>
                     <input
                         type="number"
@@ -94,22 +101,37 @@ const EditPiano = (props)=> {
                         value={piano.size}
                         onChange={handleChange}
                         required
+                        style={formInputStyle}
                     />
                 </div>
-                <div>
+                <div style={formDivStyle}>
                     <label>ImageURL:</label>
                     <input
                         type="url"
                         name="imageUrl"
                         value={piano.imageUrl}
                         onChange={handleChange}
+                        style={formInputStyle}
                     />
                 </div>
                 <button type="submit">Update piano</button>
             </form>
-            
+            <Link to={`/index_inventory`}>Back to Piano Inventory</Link>
         </div>
     )
+}
+const formStyle = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+}
+const formDivStyle = {
+    display: "flex",
+    width: "48%",
+    justifyContent: "space-between",
+}
+const formInputStyle = {
+    width: "60%",
 }
 
 export default EditPiano;
