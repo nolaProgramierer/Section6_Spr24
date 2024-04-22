@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import ListView from './listView';
 import Details from './Details';
 import AddPianoForm from './AddPianoForm';
+import EditPiano from './EditPiano';
 
 
 // Main component
@@ -58,6 +59,9 @@ useEffect(() => {
 
             {/* Add a piano */}
             <Route path ="/piano_list" element={<AddPianoForm apiUrl={url}/>} />
+
+            {/* Edit a piano */}
+            <Route path="/edit_piano/:id" element={<EditPiano data={data} apiUrl={url}/>} />
 
        </Routes>
     </Router>

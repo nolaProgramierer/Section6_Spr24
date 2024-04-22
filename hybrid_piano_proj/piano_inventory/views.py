@@ -82,17 +82,16 @@ def piano_list(request):
         pianos = Piano.objects.all()
         # Serialize the response with the full owner details
         serializer = PianoSerializer(pianos, many=True)
+        print('Piano list GET user:', request.user.id)
         return JsonResponse(serializer.data, safe=False) #Allows list in JSON
 
     elif request.method == 'POST':
         data = JSONParser().parse(request)
-        data["owner"] = request.user.id
         serializer = PianoSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data, status=201)
-        print(serializer.data)
-        print('Serializer error', serializer.errors)
+        # print('Serializer error', serializer.errors)
         return JsonResponse(serializer.errors, status=400)
 
 
@@ -113,10 +112,12 @@ def piano_detail(request, pk):
         
     elif request.method == 'PUT':
         data = JSONParser().parse(request)
+        data["owner"] = request.user.id
         serializer = PianoSerializer(piano, data=data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data)
+        # print('PUT Serializer error', serializer.errors)
         return JsonResponse(serializer.errors, status=400)
 
     elif request.method == 'DELETE':

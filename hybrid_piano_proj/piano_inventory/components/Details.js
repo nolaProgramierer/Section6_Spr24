@@ -25,7 +25,8 @@ const Details = (props) => {
                 <p>Owner: {selectedItem.owner_detail.username}</p>
                 <p><img src={selectedItem.imageUrl} alt={selectedItem.brand} piano style={imageStyle}></img></p>
             </div>
-            <Link to={`/index_inventory`}>Back to Piano Inventory</Link>   
+            <Link to={`/edit_piano/${id}`}>Edit this piano</Link>
+            <Link to={`/index_inventory`}>Back to Piano Inventory</Link>      
         </div>
     );
 };
