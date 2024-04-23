@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
+// MUI style imports
+import {Button,
+        FormControl,
+        Input,
+        InputLabel,
+        } from '@mui/material';
+
 const AddPianoForm = (props)=> {
     const { apiUrl, onPianoAdded } = props;
     const navigate = useNavigate();
@@ -71,56 +78,79 @@ const AddPianoForm = (props)=> {
 
 
     return (
-        <div>
+        <div style={formContainer}>
             <h3>Add a new piano</h3>
             {error && <p>{error}</p>}
             {success && <p>Piano added successfuly!</p>}
 
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Brand:</label>
-                    <input
+            <form style={muiFormStyle} onSubmit={handleSubmit}>
+                <FormControl>
+                    <InputLabel htmlFor="form-brand">Brand</InputLabel>
+                    <Input 
                         type="text"
                         name="brand"
                         value={piano.brand}
                         onChange={handleChange}
-                        required
+                        id="form-brand" 
+                        aria-describedby="piano-brand" 
                     />
-                </div>
-                <div>
-                    <label>Price:</label>
-                    <input
+                </FormControl> 
+                
+                <FormControl>
+                    <InputLabel htmlFor="form-price">Price</InputLabel>
+                    <Input 
                         type="number"
                         name="price"
                         value={piano.price}
                         onChange={handleChange}
-                        required
+                        id="form-price" 
+                        aria-describedby="piano-price" 
                     />
-                </div>
-                <div>
-                    <label>Size:</label>
-                    <input
+                </FormControl>
+
+                <FormControl>
+                    <InputLabel htmlFor="form-size">Size</InputLabel>
+                    <Input 
                         type="number"
                         name="size"
                         value={piano.size}
                         onChange={handleChange}
-                        required
+                        id="form-size" 
+                        aria-describedby="piano-size" 
                     />
-                </div>
-                <div>
-                    <label>ImageURL:</label>
-                    <input
+                </FormControl>
+
+                <FormControl>
+                    <InputLabel htmlFor="form-url">Image URL</InputLabel>
+                    <Input 
                         type="url"
                         name="imageUrl"
                         value={piano.imageUrl}
                         onChange={handleChange}
+                        id="form-url" 
+                        aria-describedby="piano-image-url" 
                     />
-                </div>
-                <button type="submit">Add Piano</button>
+                </FormControl>
+                <Button style={muiBtn} type="submit" variant="contained">Add New Piano</Button>
             </form>
             <Link to={`/index_inventory`}>Back to Piano Inventory</Link>
-        </div>
+        </div>   
     )
 }
 
+const formContainer = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+}
+const muiFormStyle = {
+    display: "flex",
+    flexDirection: "column",
+    height: "360px",
+    width: "60%",
+    justifyContent: "space-between",
+}
+const muiBtn = {
+    margin: "20px 0px",
+}
 export default AddPianoForm;
