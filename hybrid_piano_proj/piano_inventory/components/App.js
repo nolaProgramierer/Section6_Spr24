@@ -63,6 +63,9 @@ useEffect(() => {
             {/* Edit a piano */}
             <Route path="/edit_piano/:id" element={<EditPiano data={data} apiUrl={url}/>} />
 
+            {/* Delete a piano */}
+            {/* <Route path="/delete_piano/:id" element={<DeletePiano data={data} apiUrl={url}/>} /> */}
+
        </Routes>
     </Router>
     

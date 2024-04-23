@@ -64,6 +64,16 @@ const EditPiano = (props)=> {
             setSuccess(false);
         }
     };
+
+
+    // Handle delete
+    // const handleDelete = async () => {
+    //     try {
+    //         const response = await fetch(`${url}${id}`, {
+    //             method: "DELETE "
+    //         });
+    //     }
+    // }
     return (
         <div>
             <h3>Edit an existing piano</h3>

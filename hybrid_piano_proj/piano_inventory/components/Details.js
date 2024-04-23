@@ -21,6 +21,7 @@ const Details = (props) => {
                     throw new Error('Failed to fetch item');
                 }
                 const data = await response.json();
+                console.log(data);
                 setSelectedItem(data);
             } catch (err) {
                 setError(err.message);
@@ -55,7 +56,11 @@ const Details = (props) => {
                 <p><img src={selectedItem.imageUrl} alt={selectedItem.brand} style={imageStyle} /></p>
             </div>
 
-            <Link to={`/edit_piano/${id}`}>Edit this piano</Link>
+            {/* If Django user is the same as the piano owner render button */}
+            {selectedItem.owner === selectedItem.current_user_id ?  <Link to={`/edit_piano/${id}`}>Edit this piano</Link> : null}
+
+            {selectedItem.owner === selectedItem.current_user_id ?  <Link to={`/delete_piano/${id}`}>Delete this piano</Link> : null}
+           
             <Link to={`/index_inventory`}>Back to Piano Inventory</Link>
         </div>
     );

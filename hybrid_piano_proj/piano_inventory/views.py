@@ -82,7 +82,6 @@ def piano_list(request):
         pianos = Piano.objects.all()
         # Serialize the response with the full owner details
         serializer = PianoSerializer(pianos, many=True)
-        print('Piano list GET user:', request.user.id)
         return JsonResponse(serializer.data, safe=False) #Allows list in JSON
 
     elif request.method == 'POST':
@@ -108,7 +107,11 @@ def piano_detail(request, pk):
 
     if request.method == 'GET':
         serializer = PianoSerializer(piano)
-        return JsonResponse(serializer.data)
+        piano_data = dict(serializer.data)
+        piano_data["current_user_id"] = request.user.id
+        
+        print("Detail", piano_data)
+        return JsonResponse(piano_data)
         
     elif request.method == 'PUT':
         data = JSONParser().parse(request)
