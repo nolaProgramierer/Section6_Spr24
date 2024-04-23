@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 
+// MUI style imports
+import {Button,
+    FormControl,
+    Input,
+    InputLabel,
+    } from '@mui/material';
+
 const EditPiano = (props)=> {
     const { apiUrl, data, onDelete, onPianoAdded } = props;
 
@@ -79,63 +86,86 @@ const EditPiano = (props)=> {
 
 
     return (
-        <div>
+        <div style={formContainer}>
             <h3>Edit an existing piano</h3>
             {error && <p>{error}</p>}
-            {success && <p>Piano added successfuly!</p>}
+            {success && <p>Piano edited successfully!</p>}
 
-            <form style={formStyle} onSubmit={handleSubmit}>
-                <div style={formDivStyle}>
-                    <label>Brand:</label>
-                    <input
+            <form style={muiFormStyle} onSubmit={handleSubmit}>
+                <FormControl>
+                    <InputLabel htmlFor="form-brand">Brand</InputLabel>
+                    <Input 
                         type="text"
                         name="brand"
                         value={piano.brand}
                         onChange={handleChange}
-                        required
-                        style={formInputStyle}
+                        id="form-brand" 
+                        aria-describedby="piano-brand" 
                     />
-                </div>
-                <div style={formDivStyle}>
-                    <label>Price:</label>
-                    <input
+                </FormControl> 
+                
+                <FormControl>
+                    <InputLabel htmlFor="form-price">Price</InputLabel>
+                    <Input 
                         type="number"
                         name="price"
                         value={piano.price}
                         onChange={handleChange}
-                        required
-                        style={formInputStyle}
+                        id="form-price" 
+                        aria-describedby="piano-price" 
                     />
-                </div>
-                <div style={formDivStyle}>
-                    <label>Size:</label>
-                    <input
+                </FormControl>
+
+                <FormControl>
+                    <InputLabel htmlFor="form-size">Size</InputLabel>
+                    <Input 
                         type="number"
                         name="size"
                         value={piano.size}
                         onChange={handleChange}
-                        required
-                        style={formInputStyle}
+                        id="form-size" 
+                        aria-describedby="piano-size" 
                     />
-                </div>
-                <div style={formDivStyle}>
-                    <label>ImageURL:</label>
-                    <input
+                </FormControl>
+
+                <FormControl>
+                    <InputLabel htmlFor="form-url">Image URL</InputLabel>
+                    <Input 
                         type="url"
                         name="imageUrl"
                         value={piano.imageUrl}
                         onChange={handleChange}
-                        style={formInputStyle}
+                        id="form-url" 
+                        aria-describedby="piano-image-url" 
                     />
-                </div>
-                <button type="submit">Update piano</button>
+                </FormControl>
+                <Button style={muiSubmitBtn} type="submit" variant="contained">Edit Piano</Button>
             </form>
 
-            <button style={deleteBtn} onClick={handleDelete}>Delete this piano</button>
+            <Button color="warning" type="submit" onClick={handleDelete} variant="contained">Delete Piano</Button>
+            
+            {/* <button style={deleteBtn} onClick={handleDelete}>Delete this piano</button> */}
             <Link to={`/index_inventory`}>Back to Piano Inventory</Link>
         </div>
     )
 }
+
+const formContainer = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+}
+const muiFormStyle = {
+    display: "flex",
+    flexDirection: "column",
+    height: "360px",
+    width: "60%",
+    justifyContent: "space-between",
+}
+const muiSubmitBtn = {
+    margin: "20px 0px",
+}
+
 const formStyle = {
     display: "flex",
     flexDirection: "column",
