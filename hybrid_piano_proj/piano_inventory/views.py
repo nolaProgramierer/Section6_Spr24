@@ -17,7 +17,15 @@ class AddPiano(ModelForm):
     class Meta:
         model = Piano
         fields = ['brand', 'price', 'size', 'imageUrl']
+    
+    # Add bootstrap to input fields of ModelForm
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
+        # Loop through form fields and add a class for Bootstrap styling
+        for field_name, field in self.fields.items():
+            widget = field.widget
+            widget.attrs['class'] = widget.attrs.get('class', '') + ' form-control'
 
 def index(request):
     return render(request, "piano_inventory/index.html")

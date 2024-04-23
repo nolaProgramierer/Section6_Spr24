@@ -37,3 +37,8 @@
 #index-react-link {
     font-size: 1.25em;
 }
+
+#add-piano-form {
+    margin: auto;
+    width: 60%;
+}
