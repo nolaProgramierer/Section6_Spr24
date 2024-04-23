@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 
 // MUI style imports
@@ -9,25 +9,39 @@ import {Button,
     } from '@mui/material';
 
 const EditPiano = (props)=> {
-    const { apiUrl, data, onDelete, onPianoAdded } = props;
+    const { apiUrl, onDelete, onPianoAdded } = props;
 
     // Initialize useNavigate
     const navigate = useNavigate();
 
     // Retrieve parameter 
     const { id } = useParams();
-    const selectedItem = data.find(item => item.id === parseInt(id));
-
-    // Piano object state
-    const [piano, setPiano] = useState({
-        brand: selectedItem.brand,
-        price: selectedItem.price,
-        size: selectedItem.size,
-        imageUrl: selectedItem.imageUrl,
-    });
-
+    // State variables
+    const [piano, setPiano] = useState(null)
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
+
+
+    useEffect(() => {
+        const fetchPiano = async () => {
+            try{
+                const response = await fetch(`${apiUrl}${id}`);
+                if (!response.ok) {
+                    throw new Error("Failed to fetch the piano")
+                }
+                const data = await response.json();
+                setPiano(data);
+            } catch (err) {
+                setError(err.message)
+            }
+        };
+        fetchPiano();
+    }, [apiUrl, id]);
+
+    if (!piano) {
+        return <div>Loading...</div>; // Fallback to avoid null access
+      }
+
 
     // Handle input change
     const handleChange = (e) => {
@@ -83,7 +97,6 @@ const EditPiano = (props)=> {
             console.error("Error deleting the piano:", err.message)
         }
     }
-
 
     return (
         <div style={formContainer}>

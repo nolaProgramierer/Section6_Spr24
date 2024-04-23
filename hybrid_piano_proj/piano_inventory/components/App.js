@@ -15,7 +15,6 @@ const [data, setData] = useState([]);
 const [isLoading, setIsLoading] = useState(true);
 const [error, setError] = useState(null);
 
-console.log("Fetching pianos")
 const url = `http://127.0.0.1:8000/api/pianos/`
 
 // After component loads retrieve data from Django end point
@@ -34,7 +33,6 @@ useEffect(() => {
         setIsLoading(false);
         }
     };
-
     fetchData();
     }, []);
 
@@ -94,15 +92,10 @@ useEffect(() => {
             <Route path ="/piano_list" element={<AddPianoForm apiUrl={url} onPianoAdded={updatePianoList} />} />
 
             {/* Edit a piano */}
-            <Route path="/edit_piano/:id" element={<EditPiano data={data} apiUrl={url} onDelete={handleDelete} onPianoAdded={updatePianoList}/>} />
-
-            {/* Delete a piano */}
-            {/* <Route path="/delete_piano/:id" element={<DeletePiano data={data} apiUrl={url}/>} /> */}
+            <Route path="/edit_piano/:id" element={<EditPiano apiUrl={url} onDelete={handleDelete} onPianoAdded={updatePianoList}/>} />
 
        </Routes>
-    </Router>
-    
-    
+    </Router> 
    )
 }
 
