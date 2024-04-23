@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const AddPianoForm = (props)=> {
-    const { apiUrl } = props;
+    const { apiUrl, onPianoAdded } = props;
+    const navigate = useNavigate();
     // Piano object state
     const [piano, setPiano] = useState({
         brand: '',
@@ -41,18 +42,34 @@ const AddPianoForm = (props)=> {
                 body: JSON.stringify(piano),
             });
 
-            if (!response.ok) {
-                throw new Error("Failed to submit the form");
-            }
-            // Clear form
-            setPiano({ brand: "", size: "", price: "", imageUrl: ""});
-            setSuccess(true);
-            setError(null);
+            if (response.ok) {
+                // Clear form
+                setPiano({ brand: "", size: "", price: "", imageUrl: ""});
+                setSuccess(true);
+                setError(null);
+                // fetchUpdatedPianos();
+                // navigate("/index_inventory");
+                if (onPianoAdded) {
+                    // Refresh the parent component
+                    onPianoAdded();
+                }     
+            } else {
+                throw new Error("Failed to add piano");
+            }  
         } catch (err) {
             setError(err.message);
             setSuccess(false);
         }
     };
+
+    // Fetch updated data
+    const fetchUpdatedPianos = async () => {
+        const response = await fetch(apiUrl);
+        const jsonData = await response.json()
+        setPiano(jsonData);
+    }
+
+
     return (
         <div>
             <h3>Add a new piano</h3>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 
 const EditPiano = (props)=> {
-    const { apiUrl, data } = props;
+    const { apiUrl, data, onDelete, onPianoAdded } = props;
 
     // Initialize useNavigate
     const navigate = useNavigate();
@@ -65,15 +65,19 @@ const EditPiano = (props)=> {
         }
     };
 
+    const handleDelete = async () => {
+        try {
+            await onDelete(id);
+            if (onPianoAdded) {
+                onPianoAdded()
+            } 
+            navigate("/index_inventory");
+        } catch (err) {
+            console.error("Error deleting the piano:", err.message)
+        }
+    }
 
-    // Handle delete
-    // const handleDelete = async () => {
-    //     try {
-    //         const response = await fetch(`${url}${id}`, {
-    //             method: "DELETE "
-    //         });
-    //     }
-    // }
+
     return (
         <div>
             <h3>Edit an existing piano</h3>
@@ -126,6 +130,8 @@ const EditPiano = (props)=> {
                 </div>
                 <button type="submit">Update piano</button>
             </form>
+
+            <button style={deleteBtn} onClick={handleDelete}>Delete this piano</button>
             <Link to={`/index_inventory`}>Back to Piano Inventory</Link>
         </div>
     )
@@ -142,6 +148,10 @@ const formDivStyle = {
 }
 const formInputStyle = {
     width: "60%",
+}
+const deleteBtn = {
+    backgroundColor: "red",
+    color: "white",
 }
 
 export default EditPiano;

@@ -38,6 +38,39 @@ useEffect(() => {
     fetchData();
     }, []);
 
+    // Handle delete in EditPiano component
+    const handleDelete = async (id) => {
+       try {
+        const response = await fetch(`${url}${id}/`, {
+            method: "DELETE",
+        });
+        if (response.ok) {
+            // Sets 'data' state to a new array with all 
+            // pianos except the deleted piano
+            setData((prevData) => prevData.filter((piano) => piano.id !== id));
+            updatePianoList();
+        } else {
+            throw new Error("Failed to delete the piano");
+        }
+       } catch (err) {
+        console.error("Error deleting the piano:", err.message)
+       }
+    };
+
+    // Refresh Piano list on POST
+    const updatePianoList = async () => {
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error("Failed to fetch data")
+            }
+            const jsonData = await response.json();
+            setData(jsonData);
+        } catch (err) {
+            setError(err.message)
+        }
+    }
+
     // Render loading state if data is still loading
     if (isLoading) {
         return <div>Loading...</div>;
@@ -58,10 +91,10 @@ useEffect(() => {
             {data && <Route path="/piano_details/:id" element={<Details data={data} url={url}/>} />}
 
             {/* Add a piano */}
-            <Route path ="/piano_list" element={<AddPianoForm apiUrl={url}/>} />
+            <Route path ="/piano_list" element={<AddPianoForm apiUrl={url} onPianoAdded={updatePianoList} />} />
 
             {/* Edit a piano */}
-            <Route path="/edit_piano/:id" element={<EditPiano data={data} apiUrl={url}/>} />
+            <Route path="/edit_piano/:id" element={<EditPiano data={data} apiUrl={url} onDelete={handleDelete} onPianoAdded={updatePianoList}/>} />
 
             {/* Delete a piano */}
             {/* <Route path="/delete_piano/:id" element={<DeletePiano data={data} apiUrl={url}/>} /> */}

@@ -86,11 +86,13 @@ def piano_list(request):
 
     elif request.method == 'POST':
         data = JSONParser().parse(request)
+        # Set the owner of the piano 
+        data["owner"] = request.user.id
         serializer = PianoSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data, status=201)
-        # print('Serializer error', serializer.errors)
+        print('Serializer error', serializer.errors)
         return JsonResponse(serializer.errors, status=400)
 
 

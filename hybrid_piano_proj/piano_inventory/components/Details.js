@@ -58,9 +58,7 @@ const Details = (props) => {
 
             {/* If Django user is the same as the piano owner render button */}
             {selectedItem.owner === selectedItem.current_user_id ?  <Link to={`/edit_piano/${id}`}>Edit this piano</Link> : null}
-
-            {selectedItem.owner === selectedItem.current_user_id ?  <Link to={`/delete_piano/${id}`}>Delete this piano</Link> : null}
-           
+        
             <Link to={`/index_inventory`}>Back to Piano Inventory</Link>
         </div>
     );
