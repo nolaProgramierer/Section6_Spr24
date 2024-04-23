@@ -38,11 +38,7 @@ const EditPiano = (props)=> {
         fetchPiano();
     }, [apiUrl, id]);
 
-    if (!piano) {
-        return <div>Loading...</div>; // Fallback to avoid null access
-      }
-
-
+    
     // Handle input change
     const handleChange = (e) => {
         // Extract 'name' and 'value' from the event object
@@ -77,9 +73,6 @@ const EditPiano = (props)=> {
             setPiano({ brand: "", size: "", price: "", imageUrl: ""});
             setSuccess(true);
             setError(null);
-
-            // Navigate to piano's detail page
-            // navigate(`/piano_details/${id}`)
         } catch (err) {
             setError(err.message);
             setSuccess(false);
@@ -97,6 +90,11 @@ const EditPiano = (props)=> {
             console.error("Error deleting the piano:", err.message)
         }
     }
+
+    // Fallback to avoid null access
+    if (!piano) {
+        return <div>Loading...</div>;
+      }
 
     return (
         <div style={formContainer}>
@@ -157,7 +155,6 @@ const EditPiano = (props)=> {
 
             <Button color="warning" type="submit" onClick={handleDelete} variant="contained">Delete Piano</Button>
             
-            {/* <button style={deleteBtn} onClick={handleDelete}>Delete this piano</button> */}
             <Link to={`/index_inventory`}>Back to Piano Inventory</Link>
         </div>
     )
@@ -177,24 +174,6 @@ const muiFormStyle = {
 }
 const muiSubmitBtn = {
     margin: "20px 0px",
-}
-
-const formStyle = {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-}
-const formDivStyle = {
-    display: "flex",
-    width: "48%",
-    justifyContent: "space-between",
-}
-const formInputStyle = {
-    width: "60%",
-}
-const deleteBtn = {
-    backgroundColor: "red",
-    color: "white",
 }
 
 export default EditPiano;
