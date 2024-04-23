@@ -27,6 +27,7 @@ class AddPiano(ModelForm):
             widget = field.widget
             widget.attrs['class'] = widget.attrs.get('class', '') + ' form-control'
 
+
 def index(request):
     return render(request, "piano_inventory/index.html")
 
