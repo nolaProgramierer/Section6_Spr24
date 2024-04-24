@@ -91,7 +91,7 @@ def piano_list(request):
         # Retrieve Django model object
         pianos = Piano.objects.all()
         # Convert the object to native Python data types
-        serializer = PianoSerializer(pianos, many=True)
+        serializer = PianoSerializer(pianos, many=True) # Allows query sets
         # Convert Python to JSON
         return JsonResponse(serializer.data, safe=False) #Allows list in JSON
 
