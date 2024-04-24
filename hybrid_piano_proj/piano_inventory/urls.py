@@ -22,6 +22,7 @@ urlpatterns = [
     # path("index_inventory", TemplateView.as_view(template_name="piano_inventory/index_inventory.html")),
 ]
 
+# Django Rest Framework routing
 # router = routers.DefaultRouter()
 # router.register('api/pianos', views.piano_list)
 

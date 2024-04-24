@@ -1,13 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from "framer-motion"
+import { motion, useScroll } from "framer-motion"
 
 const ListView = (props) => {
     const { data } = props;
 
     return (
        <motion.div 
-        style={containerStyle}>
+        style={containerStyle}
+        >
             <h3>This is the Piano List view</h3>
             <div>
                 <ul style={listStyle}>
@@ -47,7 +48,6 @@ const containerStyle = {
     flexWrap: "nowrap",
     justifyContent: "center",
     alignItems: "center",
-    scaleX: "scrollYProgress",
 }
 const linkStyle = {
     display: "flex",

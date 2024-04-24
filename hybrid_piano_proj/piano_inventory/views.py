@@ -88,18 +88,23 @@ def piano_list(request):
     List all pianos, or create a new piano.
     """
     if request.method == 'GET':
+        # Retrieve Django model object
         pianos = Piano.objects.all()
-        # Serialize the response with the full owner details
+        # Convert the object to native Python data types
         serializer = PianoSerializer(pianos, many=True)
+        # Convert Python to JSON
         return JsonResponse(serializer.data, safe=False) #Allows list in JSON
 
     elif request.method == 'POST':
+        # Parse JSON response into native Python data types
         data = JSONParser().parse(request)
         # Set the owner of the piano 
         data["owner"] = request.user.id
+        # Restore the python data to a Django model object instance
         serializer = PianoSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
+            # Convert python back to JSON
             return JsonResponse(serializer.data, status=201)
         print('Serializer error', serializer.errors)
         return JsonResponse(serializer.errors, status=400)
