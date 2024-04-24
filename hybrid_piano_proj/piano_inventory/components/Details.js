@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
+import { motion } from 'framer-motion';
+
 const Details = (props) => {
     // URL for the API endpoint 
     const { url } = props;
@@ -53,7 +55,17 @@ const Details = (props) => {
                 <p>Price: ${selectedItem.price}</p>
                 <p>Piano size in cm: {selectedItem.size}</p>
                 <p>Owner: {selectedItem.owner_detail.username}</p>
-                <p><img src={selectedItem.imageUrl} alt={selectedItem.brand} style={imageStyle} /></p>
+                <motion.div>
+                    <motion.img    
+                        src={selectedItem.imageUrl} 
+                        alt={selectedItem.brand} 
+                        style={imageStyle}
+                        whileHover={{ scale: 1.05 }}
+                        onHoverStart={e => {}}
+                        onHoverEnd={e => {}}
+                    >
+                    </motion.img>
+                </motion.div>
             </div>
 
             {/* If Django user is the same as the piano owner render button */}

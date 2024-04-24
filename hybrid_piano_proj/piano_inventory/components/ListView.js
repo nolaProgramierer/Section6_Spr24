@@ -1,18 +1,33 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from "framer-motion"
 
 const ListView = (props) => {
     const { data } = props;
 
     return (
-       <div style={containerStyle}>
+       <motion.div 
+        style={containerStyle}>
             <h3>This is the Piano List view</h3>
             <div>
                 <ul style={listStyle}>
                     {data && data.map((item, index) => (
                     <li style={listItemStyle} key={index}>
                         <Link to={`/piano_details/${item.id}`}>{item.brand}</Link>
-                        <img src={item.imageUrl} alt="piano" style={imgStyle}></img>
+                        <motion.div
+                            animate={{ x: [null, 100, 0] }}
+                        >
+                            <motion.img 
+                                src={item.imageUrl} 
+                                alt="piano" 
+                                style={imgStyle}
+                                whileHover={{ scale: 1.1 }}
+                                onHoverStart={e => {}}
+                                onHoverEnd={e => {}}
+                            >
+                            </motion.img>
+                        </motion.div>
+                        
                     </li>
                     ))}
                 </ul>
@@ -22,7 +37,7 @@ const ListView = (props) => {
                 <Link  style={linkItemStyle} to={'/piano_list'}>Add a piano(async)</Link>
             </div>
             
-       </div>   
+       </motion.div>   
     )
 }
 
@@ -32,6 +47,7 @@ const containerStyle = {
     flexWrap: "nowrap",
     justifyContent: "center",
     alignItems: "center",
+    scaleX: "scrollYProgress",
 }
 const linkStyle = {
     display: "flex",

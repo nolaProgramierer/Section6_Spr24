@@ -14,7 +14,6 @@ class PianoSerializer(serializers.ModelSerializer):
      # Return full user details for GET requests, not for creating an object
     owner_detail = UserSerializer(source='owner', read_only=True)
     
-
     class Meta:
         model = Piano
         fields = ["id", "brand", "price", "size", "imageUrl", "owner", "owner_detail" ]
